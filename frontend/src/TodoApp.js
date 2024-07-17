@@ -91,9 +91,11 @@ class TodoApp extends Component {
 
   renderItems = () => {
     const { viewCompleted } = this.state;
-    const newItems = this.state.todoList.filter(
-      (item) => item.completed === viewCompleted
+    const items = this.state.todoList
+    const newItems = items.filter(
+        (item) => item.completed === viewCompleted
     );
+
 
     return newItems.map((item) => (
       <li
