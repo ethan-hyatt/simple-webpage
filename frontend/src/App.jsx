@@ -7,7 +7,6 @@ import {
     Route,
     Link,
     useNavigate,
-    Outlet,
 } from "react-router-dom";
 
 const Home = () => {
