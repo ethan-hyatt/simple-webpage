@@ -13,7 +13,7 @@ export const AppReducer = (state, action) => {
             );
             total_budget = total_budget + action.payload.cost;
             action.type = "DONE";
-            if(total_budget <= state.budget) {
+            if(total_budget <= Number(state.budget)) {
                 total_budget = 0;
                 state.expenses.map((currentExp)=> {
                     if(currentExp.name === action.payload.name) {
@@ -34,7 +34,7 @@ export const AppReducer = (state, action) => {
                 const red_expenses = state.expenses.map((currentExp)=> {
                     if (currentExp.name === action.payload.name && currentExp.cost - action.payload.cost >= 0) {
                         currentExp.cost =  currentExp.cost - action.payload.cost;
-                        budget = state.budget + action.payload.cost
+                        budget = Number(state.budget) + action.payload.cost
                     }
                     return currentExp
                 })
@@ -44,18 +44,19 @@ export const AppReducer = (state, action) => {
                     expenses: [...red_expenses],
                 };
             case 'DELETE_EXPENSE':
-            action.type = "DONE";
+            let totalE = state.expenses.reduce((total, item) => {
+              return (total = total + item.cost);
+            }, 0);
             state.expenses.map((currentExp)=> {
                 if (currentExp.name === action.payload) {
-                    budget = state.budget + currentExp.cost
+                    budget = Number(state.budget) + currentExp.cost - totalE
                     currentExp.cost =  0;
                 }
                 return currentExp
             })
             action.type = "DONE";
             return {
-                ...state,
-                budget
+                ...state
             };
         case 'SET_BUDGET':
             action.type = "DONE";
@@ -85,6 +86,7 @@ const initialState = {
         { id: "Food", name: 'Food', cost: 70 },
         { id: "Discretionary", name: 'Discretionary', cost: 40 },
         { id: "Savings", name: 'Savings', cost: 500 },
+        { id: "Other", name: 'Other', cost: 100},
     ],
     Currency: '$'
 };

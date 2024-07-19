@@ -3,6 +3,8 @@ import Modal from "./components/Modal";
 import axios from "axios";
 
 class TodoApp extends Component {
+
+  //creates the TodoApp class consisting of the list and active item
   constructor(props) {
     super(props);
     this.state = {
@@ -21,6 +23,7 @@ class TodoApp extends Component {
     this.refreshList();
   }
 
+  //calls the backend api to get the todos stored in the database
   refreshList = () => {
     axios
       .get("http://3.138.83.170:8000/api/todos/")
@@ -32,6 +35,8 @@ class TodoApp extends Component {
     this.setState({ modal: !this.state.modal });
   };
 
+  //determines whether the given todo is being created or edited and
+  //makes the appropriate backend api call
   handleSubmit = (item) => {
     this.toggle();
 
@@ -46,6 +51,7 @@ class TodoApp extends Component {
       .then((res) => this.refreshList());
   };
 
+  //calls the backend api to delete the todo and refreshes the list display
   handleDelete = (item) => {
     axios
       .delete(`http://3.138.83.170:8000/api/todos/${item.id}/`)
@@ -62,6 +68,7 @@ class TodoApp extends Component {
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
 
+  //displays complete or incomplete todos based on the current status
   displayCompleted = (status) => {
     if (status) {
       return this.setState({ viewCompleted: true });
@@ -70,6 +77,7 @@ class TodoApp extends Component {
     return this.setState({ viewCompleted: false });
   };
 
+  //constructing the format of the todo-list
   renderTabList = () => {
     return (
       <div className="nav nav-tabs">
@@ -89,6 +97,8 @@ class TodoApp extends Component {
     );
   };
 
+  //renders the appropiate todos depending on which status is being displayed
+  //along with appropraite buttons
   renderItems = () => {
     const { viewCompleted } = this.state;
     const items = this.state.todoList
@@ -128,6 +138,7 @@ class TodoApp extends Component {
     ));
   };
 
+  //function to render the page and all of the needed components
   render() {
     return (
       <main className="container">

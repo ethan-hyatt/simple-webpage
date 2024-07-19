@@ -48,6 +48,7 @@ const AllocationForm = (props) => {
                         <option value="Food" name="food">Food</option>
                         <option value="Discretionary" name="discretionary">Discretionary</option>
                         <option value="Savings" name="savings">Savings</option>
+                        <option value="Other" name="other">Other</option>
                   </select>
 
                     <div className="input-group-prepend" style={{ marginLeft: '2rem' }}>
@@ -55,7 +56,7 @@ const AllocationForm = (props) => {
                   </div>
                   <select className="custom-select" id="inputGroupSelect02" onChange={(event) => setAction(event.target.value)}>
                         <option defaultValue value="Add" name="Add">Add</option>
-                <option value="Reduce" name="Reduce">Reduce</option>
+                <option value="Reduce" name="Reduce">Subtract</option>
                   </select>
                     <p>&nbsp;&nbsp;&nbsp;&nbsp; {Currency}</p>
                     <input
