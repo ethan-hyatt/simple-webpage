@@ -9,7 +9,7 @@ const Budget = () => {
     }, 0);
     const handleBudgetChange = (event) => {
         if (event.target.value > 20000) {
-            alert("Cannot have a budget greater than 20,000");
+            alert("Cannot have a budget greater than " + Currency + "20,000");
         }
         else if (event.target.value < totalExpenses) {
             alert("You cannot reduce the budget lower than what has already been spent")
